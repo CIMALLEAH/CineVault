@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role'     => 'admin',
             'phone'    => '09171000001',
+            'is_active' => true, 
         ]);
  
         $staff = User::create([
