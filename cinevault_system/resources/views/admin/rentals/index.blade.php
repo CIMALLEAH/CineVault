@@ -41,7 +41,7 @@
                 <tr>
                     <td>
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <span style="font-size:20px;">{{ $rental->movie->poster_icon }}</span>
+                            <span style="font-size:20px;"><i class="{{ $rental->movie->poster_icon }}"></i></span>
                             <div>
                                 <div style="font-weight:500; font-size:13px;">{{ $rental->movie->title }}</div>
                                 <div style="font-size:11px; color:var(--text3);">{{ $rental->movie->genre }}</div>

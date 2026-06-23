@@ -44,7 +44,7 @@
                 @if($movie->poster_path)
                     <img src="{{ asset('storage/'.$movie->poster_path) }}" style="width:100%; height:100%; object-fit:cover;">
                 @else
-                    {{ $movie->poster_icon }}
+                    <i class="{{ $movie->poster_icon }}"></i>
                 @endif
                 <span class="badge {{ $movie->status==='available' ? 'badge-green' : 'badge-red' }}" style="position:absolute; top:8px; left:8px;">{{ ucfirst($movie->status) }}</span>
                 @if($hasRental)<span class="pulse" style="position:absolute; top:10px; right:10px;"></span>@endif
@@ -136,7 +136,7 @@
                     </div>
                     <div class="form-group">
                         <label class="form-label">Icon</label>
-                        <input class="form-input" type="text" name="poster_icon" value="🎬">
+                        <input class="form-input" type="text" name="poster_icon" value="fa-solid fa-film">
                     </div>
                     <div class="form-group" style="grid-column:1/-1;">
                         <label class="form-label">Reason / Notes</label>

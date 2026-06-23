@@ -11,7 +11,7 @@
             @if($movie->poster_path)
                 <img src="{{ asset('storage/'.$movie->poster_path) }}" style="width:100%; height:100%; object-fit:cover;">
             @else
-                {{ $movie->poster_emoji }}
+                <i class="{{ $movie->poster_icon }}"></i>
             @endif
             <span class="badge {{ $movie->status==='available' ? 'badge-green' : 'badge-red' }}" style="position:absolute; top:12px; left:12px; font-size:12px;">
                 {{ ucfirst($movie->status) }}

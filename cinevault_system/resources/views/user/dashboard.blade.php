@@ -20,7 +20,7 @@
             @foreach($activeRentals as $rental)
                 <div class="card" style="overflow:hidden; border-color:{{ $rental->isOverdue() ? 'rgba(224,82,82,.4)' : 'var(--border)' }};">
                     <div style="display:flex; align-items:center; gap:14px; padding:16px;">
-                        <span style="font-size:40px;">{{ $rental->movie->poster_emoji }}</span>
+                        <span style="font-size:40px;"><i class="{{ $rental->movie->poster_icon }}"></i></span>
                         <div style="flex:1; min-width:0;">
                             <div style="font-weight:600; font-size:14px; margin-bottom:3px;">{{ $rental->movie->title }}</div>
                             <div style="font-size:12px; color:var(--text3);">{{ $rental->movie->genre }} · {{ $rental->days }} day(s)</div>
@@ -72,7 +72,7 @@
                     @if($movie->poster_path)
                         <img src="{{ asset('storage/'.$movie->poster_path) }}" style="width:100%; height:100%; object-fit:cover;">
                     @else
-                        {{ $movie->poster_emoji }}
+                        <i class="{{ $movie->poster_icon }}"></i>
                     @endif
                     <div class="poster-watermark">
                         <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="rgba(200,160,74,.6)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -106,7 +106,7 @@
                         <tr>
                             <td>
                                 <div style="display:flex; align-items:center; gap:8px;">
-                                    <span style="font-size:18px;">{{ $r->movie->poster_emoji }}</span>
+                                    <span style="font-size:18px;"><i class="{{ $r->movie->poster_icon }}"></i></span>
                                     <span style="font-weight:500;">{{ $r->movie->title }}</span>
                                 </div>
                             </td>

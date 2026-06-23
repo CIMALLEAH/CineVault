@@ -38,7 +38,7 @@
             <div style="font-size:13px; font-weight:600; margin-bottom:14px; color:var(--text2);">My Recent Rentals</div>
             @forelse($recentRentals as $r)
                 <div style="display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--border);">
-                    <span style="font-size:22px;">{{ $r->movie->poster_icon }}</span>
+                    <span style="font-size:22px;"><i class="{{ $r->movie->poster_icon }}"></i></span>
                     <div style="flex:1;">
                         <div style="font-size:12px; font-weight:500;">{{ $r->movie->title }}</div>
                         <div style="font-size:11px; color:var(--text3);">{{ $r->customer_name }} · {{ $r->rental_date->format('M d') }}</div>
@@ -87,7 +87,7 @@
         <tbody>
             @forelse($activeRentals as $r)
                 <tr>
-                    <td><div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;">{{ $r->movie->poster_icon }}</span>{{ $r->movie->title }}</div></td>
+                    <td><div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;"><i class="{{ $r->movie->poster_icon }}"></i></span>{{ $r->movie->title }}</div></td>
                     <td>{{ $r->customer_name }}</td>
                     <td><span style="color:{{ $r->isOverdue() ? 'var(--red)' : 'var(--text)' }};">{{ $r->due_date->format('M d, Y') }}</span></td>
                     <td style="color:var(--gold); font-weight:600;">₱{{ number_format($r->total_amount) }}</td>
