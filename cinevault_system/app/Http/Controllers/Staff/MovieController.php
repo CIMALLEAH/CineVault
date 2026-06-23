@@ -35,7 +35,7 @@ class MovieController extends Controller
             'duration'      => 'nullable|integer|min:1',
             'rating'        => 'required|in:G,PG,PG-13,R',
             'description'   => 'nullable|string',
-            'poster_emoji'  => 'nullable|string|max:10',
+            'poster_icon'  => 'nullable|string|max:10',
             'price_per_day' => 'required|numeric|min:1',
         ]);
  

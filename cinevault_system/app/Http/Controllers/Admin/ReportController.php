@@ -46,11 +46,11 @@ class ReportController extends Controller
         $topMovies = Rental::join('movies', 'rentals.movie_id', '=', 'movies.id')
             ->whereBetween('rentals.rental_date', [$startDate, $endDate])
             ->select(
-                'movies.id', 'movies.title', 'movies.genre', 'movies.poster_emoji',
+                'movies.id', 'movies.title', 'movies.genre', 'movies.poster_icon',
                 DB::raw('COUNT(rentals.id) as rent_count'),
                 DB::raw('SUM(rentals.total_amount) as revenue')
             )
-            ->groupBy('movies.id', 'movies.title', 'movies.genre', 'movies.poster_emoji')
+            ->groupBy('movies.id', 'movies.title', 'movies.genre', 'movies.poster_icon')
             ->orderByDesc('rent_count')
             ->take(10)
             ->get();

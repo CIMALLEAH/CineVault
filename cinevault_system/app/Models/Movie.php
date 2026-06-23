@@ -12,7 +12,7 @@ class Movie extends Model
 
     protected $fillable = [
         'title', 'genre', 'year', 'director', 'duration', 'rating',
-        'description', 'poster_emoji', 'poster_path', 'price_per_day',
+        'description', 'poster_icon', 'poster_path', 'price_per_day',
         'status', 'copies', 'added_by',
     ];
 
@@ -65,6 +65,6 @@ class Movie extends Model
     {
         return $this->poster_path
             ? asset('storage/' . $this->poster_path)
-            : $this->poster_emoji;
+            : $this->poster_icon;
     }
 }
