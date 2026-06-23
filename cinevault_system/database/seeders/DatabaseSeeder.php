@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
              'duration'=>132,
              'rating'=>'R',    
              'price_per_day'=>70,
-             'poster_icon'=>'fa-solid fa-home',
+             'poster_icon'=>'fa-solid fa-house',
              'description'=>'Class discrimination threatens two families in Seoul.'
             ],
             [
@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
              'duration'=>175,
              'rating'=>'R',    
              'price_per_day'=>70,
-             'poster_icon'=>'fa-solid fa-rose',
+             'poster_icon'=>'fa-solid fa-wine-glass',
              'description'=>'The patriarch of a crime dynasty transfers control to his son.'
             ],
             [
@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
              'duration'=>122,
              'rating'=>'R',    
              'price_per_day'=>70,
-             'poster_icon'=>'fa-solid fa-clown',
+             'poster_icon'=>'fa-solid fa-face-grin-tongue-wink',
              'description'=>'The origin story of the iconic DC villain.'
             ],
             [
@@ -149,7 +149,7 @@ class DatabaseSeeder extends Seeder
              'duration'=>139,
              'rating'=>'R',    
              'price_per_day'=>75,
-             'poster_icon'=>'fa-solid fa-dumpling',
+             'poster_icon'=>'fa-solid fa-infinity',
              'description'=>'An immigrant discovers she alone can save the multiverse.'
             ],
             [
