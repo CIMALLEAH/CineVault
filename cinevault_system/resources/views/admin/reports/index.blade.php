@@ -95,7 +95,7 @@
                         <td style="color:var(--text3); font-weight:700;">{{ $i+1 }}</td>
                         <td>
                             <div style="display:flex; align-items:center; gap:8px;">
-                                <span style="font-size:18px;">{{ $m->poster_emoji }}</span>
+                                <span style="font-size:18px;">{{ $m->poster_icon }}</span>
                                 <span style="font-weight:500;">{{ $m->title }}</span>
                             </div>
                         </td>

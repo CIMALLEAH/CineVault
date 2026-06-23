@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role'     => 'staff',
             'phone'    => '09171000002',
+            'is_active' => true, 
         ]);
  
         $user = User::create([
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role'     => 'user',
             'phone'    => '09171000003',
+            'is_active' => true, 
         ]);
  
         // ─── Movies ───────────────────────────────────────────────────

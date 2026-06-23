@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('duration')->nullable()->comment('in minutes');
             $table->string('rating')->default('PG');
             $table->text('description')->nullable();
-            $table->string('poster_emoji')->default('🎬')->comment('emoji icon for display');
+            $table->string('poster_icon')->default('fa-solid fa-film')->comment('font awesome icon for display');
             $table->string('poster_path')->nullable()->comment('uploaded image path');
             $table->decimal('price_per_day', 8, 2)->default(50.00);
             $table->enum('status', ['available', 'rented', 'reserved', 'inactive'])->default('available');

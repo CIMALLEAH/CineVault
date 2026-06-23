@@ -44,8 +44,8 @@
     </div>
  
     <div class="form-group">
-        <label class="form-label">Emoji Icon</label>
-        <input class="form-input" type="text" name="poster_emoji" value="{{ old('poster_emoji', $movie->poster_emoji ?? '🎬') }}" placeholder="🎬" maxlength="10">
+        <label class="form-label">Icon</label>
+        <input class="form-input" type="text" name="poster_icon" value="{{ old('poster_icon', $movie->poster_icon ?? '🎬') }}" placeholder="🎬" maxlength="10">
         <div style="font-size:11px; color:var(--text3); margin-top:4px;">Used when no image is uploaded.</div>
     </div>
  

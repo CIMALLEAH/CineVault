@@ -50,7 +50,7 @@
                 @if($movie->poster_path)
                     <img src="{{ asset('storage/'.$movie->poster_path) }}" style="width:100%; height:100%; object-fit:cover;">
                 @else
-                    {{ $movie->poster_emoji }}
+                    {{ $movie->poster_icon }}
                 @endif
  
                 {{-- Status badge --}}

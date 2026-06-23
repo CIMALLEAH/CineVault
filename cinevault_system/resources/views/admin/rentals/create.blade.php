@@ -17,7 +17,7 @@
                             <option value="{{ $movie->id }}"
                                     data-price="{{ $movie->price_per_day }}"
                                     {{ (old('movie_id', request('movie_id')) == $movie->id) ? 'selected' : '' }}>
-                                {{ $movie->poster_emoji }} {{ $movie->title }} — ₱{{ number_format($movie->price_per_day) }}/day
+                                {{ $movie->poster_icon }} {{ $movie->title }} — ₱{{ number_format($movie->price_per_day) }}/day
                             </option>
                         @endforeach
                     </select>
