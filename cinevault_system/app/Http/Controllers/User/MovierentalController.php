@@ -33,7 +33,6 @@ class MovieController extends Controller
     }
 }
  
-// ─────────────────────────────────────────────────────────────────────────────
  
 namespace App\Http\Controllers\User;
  

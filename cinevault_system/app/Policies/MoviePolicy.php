@@ -20,7 +20,6 @@ class MoviePolicy
         return $user->isAdmin();
     }
  
-    /** Admin can delete directly; staff can only request delete */
     public function delete(User $user, Movie $movie): bool
     {
         return $user->isAdmin() && !$movie->hasActiveRental();

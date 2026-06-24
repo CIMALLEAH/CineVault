@@ -23,7 +23,6 @@ class Movie extends Model
         'copies'        => 'integer',
     ];
 
-    // ─── Relationships ─────────────────────────────────────────────────
     public function rentals()
     {
         return $this->hasMany(Rental::class);
@@ -44,7 +43,6 @@ class Movie extends Model
         return $this->hasMany(Approval::class);
     }
 
-    // ─── Scopes ────────────────────────────────────────────────────────
     public function scopeAvailable($query)
     {
         return $query->where('status', 'available');
@@ -55,7 +53,6 @@ class Movie extends Model
         return $genre ? $query->where('genre', $genre) : $query;
     }
 
-    // ─── Helpers ───────────────────────────────────────────────────────
     public function hasActiveRental(): bool
     {
         return $this->activeRentals()->exists();
