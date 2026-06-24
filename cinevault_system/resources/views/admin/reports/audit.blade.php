@@ -3,7 +3,7 @@
 @section('page-title', 'Audit Logs')
  
 @section('content')
-<form method="GET" style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
+<form method="GET" style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; align-items:center;">
     <select name="action" class="form-select" style="width:auto;" onchange="this.form.submit()">
         <option value="">All Actions</option>
         @foreach(['MOVIE_ADDED','MOVIE_UPDATED','MOVIE_DELETED','RENTAL_CREATED','RENTAL_RETURNED','APPROVAL_REQUESTED','APPROVAL_APPROVED','APPROVAL_REJECTED','USER_CREATED','USER_DELETED'] as $action)
@@ -12,6 +12,7 @@
     </select>
     <button type="submit" class="btn btn-secondary btn-sm">Filter</button>
     <a href="{{ route('admin.audit.index') }}" class="btn btn-secondary btn-sm">Clear</a>
+    <a href="{{ route('admin.audit.export', request()->only(['action','user_id'])) }}" class="btn btn-primary btn-sm">Export to Excel</a>
 </form>
  
 <div class="card">

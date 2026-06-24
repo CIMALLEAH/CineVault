@@ -1,3 +1,4 @@
+$content = @'
 <?php
  
 namespace App\Http\Controllers\Admin;
@@ -215,3 +216,6 @@ class ReportController extends Controller
         };
     }
 }
+'@;
+Set-Content -Path 'app\Http\Controllers\Admin\ReportController.php' -Value $content -Encoding utf8;
+Write-Host 'ReportController rewritten'

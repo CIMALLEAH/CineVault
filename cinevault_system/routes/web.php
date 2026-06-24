@@ -54,6 +54,7 @@ Route::prefix('admin')
         // Reports & Audit Logs
         Route::get('/reports',    [Admin\ReportController::class, 'index'])->name('reports.index');
         Route::get('/audit-logs', [Admin\ReportController::class, 'auditLogs'])->name('audit.index');
+        Route::get('/audit-logs/export', [Admin\ReportController::class, 'exportAuditLogs'])->name('audit.export');
     });
 
 // ─── STAFF Routes ─────────────────────────────────────────────────────────────
