@@ -102,7 +102,12 @@
                     <tr>
                         <td><div style="display:flex; align-items:center; gap:8px;"><span style="font-size:18px;"><i class="{{ $r->movie->poster_icon }}"></i></span>{{ $r->movie->title }}</div></td>
                         <td>{{ $r->customer_name }}</td>
-                        <td><span style="color:{{ $r->isOverdue() ? 'var(--red)' : 'var(--text)' }};">{{ $r->due_date->format('M d, Y') }}</span></td>
+                        <td>
+                            <span class="{{ $r->isOverdue() ? 'text-red' : 'text-default' }}">
+                                {{ $r->due_date->format('M d, Y') }}
+                            </span>
+                        </td>
+
                         <td style="color:var(--gold); font-weight:600;">₱{{ number_format($r->total_amount) }}</td>
                         <td><span class="badge badge-red"><span class="pulse" style="width:5px;height:5px;margin-right:3px;"></span>Active</span></td>
                         <td>
@@ -118,4 +123,4 @@
             </tbody>
         </table>
     </div>
-</@endsection
+@endsection

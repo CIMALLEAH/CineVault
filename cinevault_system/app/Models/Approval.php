@@ -19,7 +19,6 @@ class Approval extends Model
         'reviewed_at' => 'datetime',
     ];
 
-    // ─── Relationships ─────────────────────────────────────────────────
     public function requester()
     {
         return $this->belongsTo(User::class, 'requested_by');
@@ -35,7 +34,6 @@ class Approval extends Model
         return $this->belongsTo(Movie::class);
     }
 
-    // ─── Scopes ────────────────────────────────────────────────────────
     public function scopePending($query)
     {
         return $query->where('status', 'pending');

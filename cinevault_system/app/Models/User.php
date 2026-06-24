@@ -27,12 +27,10 @@ class User extends Authenticatable
         ];
     }
 
-    // ─── Role Helpers ──────────────────────────────────────────────────
     public function isAdmin(): bool  { return $this->role === 'admin'; }
     public function isStaff(): bool  { return $this->role === 'staff'; }
     public function isUser(): bool   { return $this->role === 'user'; }
 
-    // ─── Relationships ─────────────────────────────────────────────────
     public function rentals()
     {
         return $this->hasMany(Rental::class);
