@@ -477,7 +477,7 @@
                 {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
             </div>
             <div style="flex:1; min-width:0;">
-                <div class="user-footer-name">{{ auth()->user()->name }}</div>
+                <a href="{{ route('profile.edit') }}" class="user-footer-name" style="display:block; color:inherit; text-decoration:none; cursor:pointer;">{{ auth()->user()->name }}</a>
                 <div style="font-size:10px; color:var(--text3); text-transform:capitalize; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ auth()->user()->role }}</div>
             </div>
             <form method="POST" action="{{ route('logout') }}" style="flex-shrink:0;">

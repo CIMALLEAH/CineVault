@@ -18,6 +18,12 @@ Route::get('/', function () {
 // ─── Breeze Auth Routes ───────────────────────────────────────────────────────
 require __DIR__ . '/auth.php';
 
+// ─── Profile Routes ───────────────────────────────────────────────────────────
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', ['App\Http\Controllers\ProfileController', 'edit'])->name('profile.edit');
+    Route::put('/profile', ['App\Http\Controllers\ProfileController', 'update'])->name('profile.update');
+});
+
 // ─── ADMIN Routes ─────────────────────────────────────────────────────────────
 Route::prefix('admin')
     ->name('admin.')
