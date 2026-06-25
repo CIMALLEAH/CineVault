@@ -43,9 +43,19 @@ class Approval extends Model
     {
         return match($this->type) {
             'add_movie'    => 'Add Movie',
-            'delete_movie' => 'Delete Movie',
             'edit_movie'   => 'Edit Movie',
-            default        => $this->type,
+            'delete_movie' => 'Delete Movie',
+            default        => ucfirst(str_replace('_', ' ', $this->type)),
+        };
+    }
+
+    public function getTypeBadgeClass(): string
+    {
+        return match($this->type) {
+            'add_movie'    => 'badge-green',
+            'edit_movie'   => 'badge-blue',
+            'delete_movie' => 'badge-red',
+            default        => 'badge-gold',
         };
     }
 }

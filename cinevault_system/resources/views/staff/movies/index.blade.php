@@ -10,10 +10,9 @@
 @endsection
 
 @section('content')
-{{-- Info banner --}}
 <div class="alert" style="background:rgba(82,148,224,.08); border:1px solid rgba(82,148,224,.2); color:var(--blue); margin-bottom:16px;">
     <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    As Staff, you can add movies (requires admin approval) but cannot delete them directly. To delete, use the Request Delete option.
+    As Staff, all movie changes (add, edit, delete) require admin approval before taking effect.
 </div>
 
 {{-- Filters --}}
@@ -36,9 +35,14 @@
 </form>
 
 {{-- Movie Grid --}}
-<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(175px,1fr)); gap:16px;">
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px;">
     @forelse($movies as $movie)
-        @php $hasRental = $movie->hasActiveRental(); @endphp
+        @php
+            $available = $movie->available_copies;
+            $total     = $movie->copies;
+            $hasRental = $movie->hasActiveRental();
+            $canRent   = $available > 0 && $movie->status !== 'inactive';
+        @endphp
         <div class="card" style="overflow:hidden;">
             <div style="height:200px; position:relative; background:linear-gradient(145deg,var(--bg3),var(--bg4)); display:flex; align-items:center; justify-content:center; font-size:52px; overflow:hidden;">
                 @if($movie->poster_path)
@@ -46,7 +50,9 @@
                 @else
                     <i class="{{ $movie->poster_icon }}"></i>
                 @endif
-                <span class="badge {{ $movie->status==='available' ? 'badge-green' : 'badge-red' }}" style="position:absolute; top:8px; left:8px;">{{ ucfirst($movie->status) }}</span>
+                <span class="badge {{ $canRent ? 'badge-green' : 'badge-red' }}" style="position:absolute; top:8px; left:8px; font-size:10px;">
+                    {{ $canRent ? $available . '/' . $total . ' avail.' : 'All Rented' }}
+                </span>
                 @if($hasRental)<span class="pulse" style="position:absolute; top:10px; right:10px;"></span>@endif
                 <div class="poster-watermark">
                     <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="rgba(200,160,74,.6)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -54,17 +60,40 @@
                 </div>
             </div>
             <div style="padding:12px;">
-                <div style="font-size:13px; font-weight:600; margin-bottom:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ $movie->title }}</div>
-                <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text3); margin-bottom:8px;">
+                <div style="font-size:13px; font-weight:600; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ $movie->title }}</div>
+                <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text3); margin-bottom:6px;">
                     <span>{{ $movie->genre }}</span><span>{{ $movie->year }}</span>
                 </div>
-                <div style="font-size:14px; font-weight:700; color:var(--gold); margin-bottom:10px;">₱{{ number_format($movie->price_per_day) }}<span style="font-size:10px; color:var(--text3); font-weight:400;">/day</span></div>
+
+                {{-- Pricing tiers --}}
+                <div style="font-size:11px; margin-bottom:8px; display:flex; flex-direction:column; gap:2px;">
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--text3);">🎬</span>
+                        <span style="color:var(--gold); font-weight:600;">₱{{ number_format($movie->effective_screening_price) }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--text3);">📅/day</span>
+                        <span style="font-weight:600;">₱{{ number_format($movie->price_per_day) }}</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between;">
+                        <span style="color:var(--text3);">📆/week</span>
+                        <span style="font-weight:600;">₱{{ number_format($movie->effective_weekly_price) }}</span>
+                    </div>
+                </div>
+
                 <div style="display:flex; gap:5px;">
-                    @if($movie->status === 'available')
+                    @if($canRent)
                         <a href="{{ route('staff.rentals.create') }}?movie_id={{ $movie->id }}" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">Rent</a>
                     @else
-                        <span class="btn btn-secondary btn-sm" style="flex:1; justify-content:center; opacity:.5; cursor:not-allowed;">Rented</span>
+                        <span class="btn btn-secondary btn-sm" style="flex:1; justify-content:center; opacity:.5; cursor:not-allowed;">All Rented</span>
                     @endif
+
+                    {{-- Request Edit --}}
+                    <a href="{{ route('staff.movies.request-edit', $movie) }}" class="btn btn-secondary btn-sm" title="Request Edit">
+                        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </a>
+
+                    {{-- Request Delete --}}
                     @if(!$hasRental)
                         <form method="POST" action="{{ route('staff.movies.request-delete', $movie) }}" onsubmit="return confirm('Submit delete request for admin approval?')">
                             @csrf
@@ -121,8 +150,20 @@
                         <input class="form-input" type="number" name="year" value="{{ date('Y') }}" required>
                     </div>
                     <div class="form-group">
+                        <label class="form-label">Copies *</label>
+                        <input class="form-input" type="number" name="copies" value="1" required min="1">
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">Price/Day (₱) *</label>
-                        <input class="form-input" type="number" name="price_per_day" value="50" required step="0.01" min="1">
+                        <input class="form-input" type="number" name="price_per_day" value="50" required step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Screening Price (₱)</label>
+                        <input class="form-input" type="number" name="price_per_screening" step="0.01" min="0" placeholder="Auto (1.5× daily)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Weekly Price (₱)</label>
+                        <input class="form-input" type="number" name="price_per_week" step="0.01" min="0" placeholder="Auto (5× daily)">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Rating *</label>
